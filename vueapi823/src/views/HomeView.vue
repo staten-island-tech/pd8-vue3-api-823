@@ -1,9 +1,18 @@
+<template>
+  <div></div>
+</template>
+
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+/*
+-----------------------------------------------
+import { ref, onMounted } from 'vue'
+const test = ref('')
+async function getData() {
+  let res = await fetch()
+}
+L1 6:30
+-----------------------------------------------
+*/
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style scoped></style>
