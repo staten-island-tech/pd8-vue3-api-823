@@ -1,9 +1,18 @@
 <template>
-  <div></div>
+  <div class="container">
+    <DataCard
+      v-for="(animal, index) in test"
+      :key="animal.animalname"
+      :id="index + 1"
+      :animal="animal"
+    />
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import DataCard from '../components/DataCard.vue'
+
 const test = ref('')
 async function getData() {
   let res = await fetch(
@@ -15,11 +24,12 @@ async function getData() {
 onMounted(() => {
   getData()
 })
-// L2 1:50
+// https://pokeapi.com/api/v2/pokemon?limit=151&offset=0
+// L3 1:00
 </script>
 
 <style scoped>
-.flexContainer {
+.container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
