@@ -2,7 +2,7 @@
   <div class="container">
     <DogCard
       v-for="(animal, index) in dog"
-      :key="animal.ZipCode"
+      :key="animal.animalName"
       :id="index + 1"
       :animal="animal"
     />
