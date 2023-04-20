@@ -25,7 +25,7 @@ onMounted(() => {
   getData()
 })
 // https://pokeapi.com/api/v2/pokemon?limit=151&offset=0
-// L3 1:00
+// L3 5:00
 </script>
 
 <style scoped>
