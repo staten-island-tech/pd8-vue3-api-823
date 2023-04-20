@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <DogCard
-      v-for="(animal, index) in dog"
-      :key="animal.animalName"
-      :id="index + 1"
-      :animal="animal"
-    />
+    <DogCard v-for="(animal, index) in dog" :key="animal.animalName" :id="index" :animal="animal" />
   </div>
 </template>
 

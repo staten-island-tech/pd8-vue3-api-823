@@ -1,12 +1,17 @@
 <template>
-  <div class="card">
+  <router-link :to="dogPath" class="card">
     <h2>{{ animal.animalName }}</h2>
     <h3>{{ id }}</h3>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({ animal: Object, id: Number })
+const dogPath = computed(() => {
+  return `/dogData/${props.dog.name}`
+})
+//L4:04
 </script>
 
 <style scoped>
