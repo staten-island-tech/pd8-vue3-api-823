@@ -1,25 +1,27 @@
 <template>
   <div class="container">
-    <PokemonCard
-      v-for="(monster, index) in pokemon"
-      :key="monster.name"
+    <DogCard
+      v-for="(animal, index) in dog"
+      :key="animal.ZipCode"
       :id="index + 1"
-      :pokemon="monster"
+      :animal="animal"
     />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import PokemonCard from '../components/pokemoncard.vue'
-const pokemon = ref('')
-async function getPokemon() {
-  let res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
+import DogCard from '../components/DogCard.vue'
+const dog = ref('')
+async function getDog() {
+  let res = await fetch(
+    'https://data.cityofnewyork.us/resource/nu7n-tubp.json?$query=SELECT%0A%20%20%60animalname%60%2C%0A%20%20%60animalgender%60%2C%0A%20%20%60animalbirth%60%2C%0A%20%20%60breedname%60%2C%0A%20%20%60zipcode%60%2C%0A%20%20%60licenseissueddate%60%2C%0A%20%20%60licenseexpireddate%60%2C%0A%20%20%60extract_year%60'
+  )
   let data = await res.json()
-  pokemon.value = data.results
+  dog.value = data
 }
 onMounted(() => {
-  getPokemon()
+  getDog()
 })
 </script>
 
