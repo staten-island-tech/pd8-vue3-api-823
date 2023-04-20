@@ -9,9 +9,9 @@
 import { computed } from 'vue'
 const props = defineProps({ animal: Object, id: Number })
 const dogPath = computed(() => {
-  return `/dogData/${props.dog.name}`
+  return `/dogData/${props.animal.animalName}`
 })
-//L4:04
+//L3:04
 </script>
 
 <style scoped>
