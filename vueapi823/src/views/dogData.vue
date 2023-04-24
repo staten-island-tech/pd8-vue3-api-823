@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>test</h1>
+    <h1>{{ animal.animalname }}</h1>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
     }
   },
   mounted: async function () {
-    await this.getData()
+    await this.getDog()
   },
   methods: {
     getDog: async function () {

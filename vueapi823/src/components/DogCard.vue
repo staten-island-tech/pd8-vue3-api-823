@@ -1,6 +1,6 @@
 <template>
   <router-link :to="dogPath" class="card">
-    <h2>{{ animal.animalName }}</h2>
+    <h2>{{ animal.animalname }}</h2>
     <h3>{{ id }}</h3>
   </router-link>
 </template>
@@ -9,7 +9,7 @@
 import { computed } from 'vue'
 const props = defineProps({ animal: Object, id: Number })
 const dogPath = computed(() => {
-  return `/dogData/${props.animal.animalName}`
+  return `/dogData/${props.animal.animalname}`
 })
 //L3:04
 </script>
