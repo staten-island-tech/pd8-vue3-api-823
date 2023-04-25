@@ -9,9 +9,10 @@
 import { computed } from 'vue'
 const props = defineProps({ animal: Object, id: Number })
 const dogPath = computed(() => {
-  return `/dogData/${props.animal.animalname}`
+  return `dogData/${props.animal.animalname}`
+  //dogData/${props.animal.animalname}
+  //`https://data.cityofnewyork.us/resource/nu7n-tubp.json?$query=SELECT `animalname`,`animalgender`,`animalbirth`, `breedname`, `zipcode`, `licenseissueddate`, `licenseexpireddate`, `extract_year` WHERE (`animalname` IN ("${props.animal.animalname}"))`
 })
-//L3:04
 </script>
 
 <style scoped>
