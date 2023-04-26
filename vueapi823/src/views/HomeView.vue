@@ -1,7 +1,19 @@
 <template>
-  <div class="container">
-    <DogCard v-for="(animal, index) in dog" :key="animal.animalname" :id="index" :animal="animal" />
+  <div id="wrapperDiv">
+    <div id="instructionsDiv">
+      <div>Dog Charts</div>
+      <div>Instructions Here</div>
+    </div>
+    <div id="selectionDiv">
+      <select>
+        <option>Popularity</option>
+        <option>Year</option>
+      </select>
+    </div>
   </div>
+  <!-- <div class="container">
+    <DogCard v-for="(animal, index) in dog" :key="animal.animalname" :id="index" :animal="animal" />
+  </div> -->
 </template>
 
 <script setup>
@@ -21,7 +33,22 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.container {
+#wrapperDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#instructionsDiv {
+  border: solid black;
+  width: 55%;
+}
+#selectionDiv {
+  border: solid black;
+  width: 45%;
+}
+/* .container {
   width: 80vw;
   margin: 30px auto;
   display: flex;
@@ -29,5 +56,5 @@ onMounted(() => {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-}
+} */
 </style>
