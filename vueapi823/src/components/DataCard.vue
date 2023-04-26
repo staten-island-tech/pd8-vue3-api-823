@@ -1,15 +1,18 @@
 <template>
-  <router-link :to="dogPath" class="card">
+  <router-link :to="dataPath" class="card">
     <h2>{{ animal.animalname }}</h2>
-    <h3>{{ id }}</h3>
+    <h2>{{ id }}</h2>
   </router-link>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-const props = defineProps({ animal: Object, id: Number })
-const dogPath = computed(() => {
-  return `/dogData/${props.animal.animalname}`
+const props = defineProps({
+  animal: Object,
+  id: Number
+})
+const dataPath = computed(() => {
+  return `/AnimalData/${props.animal.animalname}`
 })
 </script>
 
