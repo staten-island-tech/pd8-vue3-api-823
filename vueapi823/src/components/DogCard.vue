@@ -9,15 +9,17 @@
 import { computed } from 'vue'
 const props = defineProps({ animal: Object, id: Number })
 const dogPath = computed(() => {
-  return `/dogData/${props.animal.animalname}`
+  return `/dogData/${props.animal.animalName}`
 })
+//L3:04
 </script>
 
 <style scoped>
 .card {
   width: 28%;
   height: 500px;
-  background-color: aliceblue;
+  background-color: blue;
+  color: white;
   margin: 30px 0;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ animal.animalname }}</h1>
+    <h1>{{ animal }}</h1>
   </div>
 </template>
 

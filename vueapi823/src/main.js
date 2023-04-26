@@ -1,12 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/AnimalData/:id',
-      name: 'AnimalData',
-      component: () => import('./views/AnimalData.vue')
-    }
-  ]
-})
+import App from './App.vue'
+import router from './router'
+
+import './assets/main.css'
+
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
