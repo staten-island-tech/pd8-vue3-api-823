@@ -16,10 +16,8 @@ export default {
   },
   methods: {
     getDog: async function () {
-      // let rest = "https://data.cityofnewyork.us/resource/nu7n-tubp.json?$query=SELECT`animalname`,`animalgender`,`animalbirth`,`breedname`,`zipcode`,`licenseissueddate`,`licenseexpireddate`,`extract_year`WHERE (`key` IN (""))"
-
       let res = await fetch(
-        `https://data.cityofnewyork.us/resource/nu7n-tubp.json?$query=SELECTanimalname,WHERE(keyIN ("value"))`
+        `https://data.cityofnewyork.us/resource/nu7n-tubp.json?animalname=${this.$route.params.id}`
       )
       let data = await res.json()
       console.log(data)
