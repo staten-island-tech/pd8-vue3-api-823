@@ -1,16 +1,12 @@
 <template>
-  <div id="wrapperDiv">
-    <div id="instructionsDiv">
-      <div>Dog Charts</div>
-      <div>Instructions Here</div>
-    </div>
-    <div id="selectionDiv">
-      <select>
-        <option>Popularity</option>
-        <option>Year</option>
-      </select>
-    </div>
+  <div id="headingDiv">
+    <router-link to="HomeView">Home</router-link>
+    <router-link to="PopularityView">Popularity</router-link>
+    <router-link to="YearView">Year</router-link>
+    <router-link to="BothView">Both</router-link>
   </div>
+  <div id="informationDiv">Info Here</div>
+
   <!-- <div class="container">
     <DogCard v-for="(animal, index) in dog" :key="animal.animalname" :id="index" :animal="animal" />
   </div> -->
@@ -18,7 +14,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import DogCard from '../components/DogCard.vue'
+
+// import DogCard from '../components/DogCard.vue'
+
 const dog = ref('')
 async function getDog() {
   let res = await fetch(
@@ -33,20 +31,24 @@ onMounted(() => {
 </script>
 
 <style scoped>
-#wrapperDiv {
+#headingDiv {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 2rem 0rem;
+  border: solid black;
+  font-size: 2rem;
 }
 
-#instructionsDiv {
+#informationDiv {
+  text-align: center;
   border: solid black;
-  width: 55%;
-}
-#selectionDiv {
-  border: solid black;
-  width: 45%;
+  padding: 2rem 0rem;
+  width: 50%;
+  margin-top: 20rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .container {
   width: 80vw;
