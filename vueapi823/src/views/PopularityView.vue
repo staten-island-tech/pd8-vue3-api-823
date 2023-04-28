@@ -1,10 +1,5 @@
 <template>
-  <div id="headingDiv">
-    <router-link to="HomeView">Home</router-link>
-    <router-link to="PopularityView">Popularity</router-link>
-    <router-link to="YearView">Year</router-link>
-    <router-link to="BothView">Both</router-link>
-  </div>
+  <HeadingTemplate></HeadingTemplate>
   <div id="wrapperDiv">
     <div id="selectionDiv">
       <h2>Popularity Category</h2>
@@ -19,20 +14,11 @@
 </template>
 
 <script>
-export default {}
+import HeadingTemplate from './HeadingTemplate.vue'
+export default { components: { HeadingTemplate } }
 </script>
 
 <style scoped>
-#headingDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  padding: 2rem 0rem;
-  border: solid black;
-  font-size: 2rem;
-}
-
 #informationDiv {
   text-align: center;
   border: solid black;

@@ -1,12 +1,6 @@
 <template>
-  <div id="headingDiv">
-    <router-link to="HomeView">Home</router-link>
-    <router-link to="PopularityView">Popularity</router-link>
-    <router-link to="YearView">Year</router-link>
-    <router-link to="BothView">Both</router-link>
-  </div>
+  <HeadingTemplate></HeadingTemplate>
   <div id="informationDiv">Info Here</div>
-
   <!-- <div class="container">
     <DogCard v-for="(animal, index) in dog" :key="animal.animalname" :id="index" :animal="animal" />
   </div> -->
@@ -14,7 +8,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import HeadingTemplate from './HeadingTemplate.vue'
 // import DogCard from '../components/DogCard.vue'
 
 const dog = ref('')
@@ -31,16 +25,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-#headingDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  padding: 2rem 0rem;
-  border: solid black;
-  font-size: 2rem;
-}
-
 #informationDiv {
   text-align: center;
   border: solid black;
