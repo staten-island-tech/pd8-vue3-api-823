@@ -1,7 +1,7 @@
 <template>
   <HeadingTemplate></HeadingTemplate>
   <div id="wrapperDiv">
-    <div id="selectionDiv">
+    <form id="selectionDiv">
       <h2>Year Category</h2>
       <select>
         <option></option>
@@ -9,14 +9,17 @@
         <option>License Expired</option>
         <option>Extract Year</option>
       </select>
-    </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
     <div id="resultDiv">result</div>
   </div>
 </template>
 
-<script>
+<script setup>
 import HeadingTemplate from './HeadingTemplate.vue'
-export default { components: { HeadingTemplate } }
 </script>
 
 <style scoped>
