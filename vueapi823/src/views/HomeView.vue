@@ -34,6 +34,7 @@ onMounted(() => {
   margin-left: auto;
   margin-right: auto;
 }
+
 /* .container {
   width: 80vw;
   margin: 30px auto;
