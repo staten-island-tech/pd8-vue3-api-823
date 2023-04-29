@@ -21,7 +21,7 @@
 import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
 
-async function popularityChosen() {
+async function organizeDataByPopularity() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
     event.preventDefault() // Stops from refreshing page
     const popularityMap = new Map() // Create a new map (Not needed)
@@ -41,7 +41,7 @@ async function popularityChosen() {
     switch (
       document.getElementById('selectPopularity').value // Alternative to if/else statement with less typing and words all over the screen
     ) {
-      case 'Most Popular':
+      case 'Most Popular': // When "Most Popular" is selected
         document.getElementById('resultDiv').innerHTML = '' // Clear the div
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
@@ -54,7 +54,7 @@ async function popularityChosen() {
           document.getElementById('resultDiv').appendChild(node)
         }
         break
-      case 'Least Popular':
+      case 'Least Popular': // When "Least Popular" is selected
         document.getElementById('resultDiv').innerHTML = '' // Clear the div
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
@@ -82,7 +82,7 @@ async function getDog() {
 
 onMounted(() => {
   getDog()
-  popularityChosen()
+  organizeDataByPopularity()
 })
 </script>
 
