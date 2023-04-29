@@ -113,4 +113,11 @@ onMounted(() => {
   width: 60%;
   border: solid black;
 }
+
+html,
+body,
+* {
+  background-color: white;
+  color: black;
+}
 </style>

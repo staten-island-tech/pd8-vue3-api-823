@@ -35,6 +35,13 @@ onMounted(() => {
   margin-right: auto;
 }
 
+html,
+body,
+* {
+  background-color: white;
+  color: black;
+}
+
 /* .container {
   width: 80vw;
   margin: 30px auto;
