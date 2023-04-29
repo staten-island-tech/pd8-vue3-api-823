@@ -24,10 +24,23 @@ import HeadingTemplate from './HeadingTemplate.vue'
 async function popularityChosen() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
     event.preventDefault()
+    const popularityMap = new Map()
+    document.getElementById('resultDiv').innerHTML = 'Most Popular'
+    for (let i = 0; i < dog._rawValue.length; i++) {
+      if (popularityMap.has(dog._rawValue[i].breedname)) {
+        popularityMap.set(
+          `${dog._rawValue[i].breedname}`,
+          `${Number(popularityMap.get(dog._rawValue[i].breedname)) + 1}`
+        )
+      } else {
+        popularityMap.set(`${dog._rawValue[i].breedname}`, 1)
+      }
+    }
+    let array = Array.from(popularityMap, ([name, value]) => ({ name, value }))
     switch (document.getElementById('selectPopularity').value) {
       case 'Most Popular':
-        document.getElementById('resultDiv').innerHTML = 'Most Popular'
-        console.log(dog)
+        console.log(array)
+        console.log(popularityMap)
         break
       case 'Least Popular':
         document.getElementById('resultDiv').innerHTML = 'Least Popular'
