@@ -23,30 +23,49 @@ import HeadingTemplate from './HeadingTemplate.vue'
 
 async function popularityChosen() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
-    event.preventDefault()
-    const popularityMap = new Map()
-    document.getElementById('resultDiv').innerHTML = 'Most Popular'
+    event.preventDefault() // Stops from refreshing page
+    const popularityMap = new Map() // Create a new map (Not needed)
     for (let i = 0; i < dog._rawValue.length; i++) {
+      // Iterate through the entire API
       if (popularityMap.has(dog._rawValue[i].breedname)) {
+        // Checks if the dog exists in the map
         popularityMap.set(
           `${dog._rawValue[i].breedname}`,
           `${Number(popularityMap.get(dog._rawValue[i].breedname)) + 1}`
-        )
+        ) // If it does, increase the dogs count by 1
       } else {
-        popularityMap.set(`${dog._rawValue[i].breedname}`, 1)
+        popularityMap.set(`${dog._rawValue[i].breedname}`, 1) // If it does not exist, add the key-value pair to the map
       }
     }
-    let array = Array.from(popularityMap, ([name, value]) => ({ name, value }))
-    switch (document.getElementById('selectPopularity').value) {
+    let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count })) // Convert to an array (I partially understand how this one works, stole this one from the Stack Overflow.
+    switch (
+      document.getElementById('selectPopularity').value // Alternative to if/else statement with less typing and words all over the screen
+    ) {
       case 'Most Popular':
-        console.log(array)
-        console.log(popularityMap)
+        document.getElementById('resultDiv').innerHTML = '' // Clear the div
+        let mostPopular = array.sort(
+          (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
+        ) // Sort by most popular
+        for (let i = 0; i < 5; i++) {
+          // Filters out the top 5 dogs
+          const node = document.createElement('p') // Useless stuff that I just copy and pasted for no reason
+          const textnode = document.createTextNode(`${mostPopular[i].breedname}`)
+          node.appendChild(textnode)
+          document.getElementById('resultDiv').appendChild(node)
+        }
         break
       case 'Least Popular':
-        document.getElementById('resultDiv').innerHTML = 'Least Popular'
-        break
-      default:
-        document.getElementById('resultDiv').innerHTML = 'Nothing'
+        document.getElementById('resultDiv').innerHTML = '' // Clear the div
+        let leastPopular = array.sort(
+          (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
+        ) // Sort by least popular
+        for (let i = 0; i < 5; i++) {
+          // Filters out the bottom 5 dogs
+          const node = document.createElement('p') // Useless stuff that I just copy and pasted for no reason
+          const textnode = document.createTextNode(`${leastPopular[i].breedname}`)
+          node.appendChild(textnode)
+          document.getElementById('resultDiv').appendChild(node)
+        }
         break
     }
   })
