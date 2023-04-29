@@ -89,6 +89,12 @@ onMounted(() => {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+html,
+body,
+* {
+  background-color: white;
+  color: black;
+}
 
 #selectionDiv {
   width: 40%;
