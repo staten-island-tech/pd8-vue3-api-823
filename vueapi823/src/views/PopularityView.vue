@@ -21,6 +21,8 @@
 import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
 
+let breedNames = []
+let breedStats = []
 const popularityMap = new Map()
 function mapCreation(fieldName) {
   popularityMap.clear()
@@ -40,24 +42,31 @@ function organizeDataByPopularity() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
     event.preventDefault()
     mapCreation('breedname')
-
     let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
     document.getElementById('resultDiv').innerHTML = ''
     switch (document.getElementById('selectPopularity').value) {
       case 'Most Popular':
+        breedNames = []
+        breedCount = []
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
         )
         for (let i = 1; i < 6; i++) {
           console.log(mostPopular[i])
+          breedCount.push(mostPopular[i].count)
+          breedNames.push(mostPopular[i].breedname)
+          console.log(breedNames)
         }
         break
       case 'Least Popular':
+        breedNames = []
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
         )
         for (let i = 0; i < 5; i++) {
           console.log(leastPopular[i])
+          breedCount.push(leastPopular[i].count)
+          breedNames.push(leastPopular[i].breedname)
         }
         break
     }
