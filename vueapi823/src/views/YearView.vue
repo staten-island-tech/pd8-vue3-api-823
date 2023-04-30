@@ -59,9 +59,7 @@ function organizeDataByYear() {
 
 const dog = ref('')
 async function getDogFromAPI() {
-  let res = await fetch(
-    `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${inputYear}`
-  )
+  let res = await fetch(`https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000`)
   let data = await res.json()
   dog.value = data
 }

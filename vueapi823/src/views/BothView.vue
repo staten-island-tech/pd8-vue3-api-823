@@ -47,15 +47,13 @@ import { ref, onMounted } from 'vue'
 const dog = ref('')
 async function getDog() {
   let res = await fetch(
-    `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${inputYear}`
+    `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${inputYear}?$limit=10000`
   )
   let data = await res.json()
   dog.value = data
 }
 
-onMounted(() => {
-  test()
-})
+onMounted(() => {})
 </script>
 
 <style scoped>
