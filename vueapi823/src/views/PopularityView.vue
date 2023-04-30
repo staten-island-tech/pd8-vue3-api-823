@@ -22,7 +22,7 @@ import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
 
 let breedNames = []
-let breedStats = []
+let breedCount = []
 const popularityMap = new Map()
 function mapCreation(fieldName) {
   popularityMap.clear()
