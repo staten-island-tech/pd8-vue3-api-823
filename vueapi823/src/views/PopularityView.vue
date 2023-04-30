@@ -48,7 +48,7 @@ function organizeDataByPopularity() {
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
         )
-        for (let i = 0; i < 5; i++) {
+        for (let i = 1; i < 6; i++) {
           console.log(mostPopular[i])
         }
         break
