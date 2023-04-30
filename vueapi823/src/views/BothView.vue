@@ -9,15 +9,15 @@
         <option id="lPopular">Least Popular</option>
       </select>
       <h2>Year Category</h2>
-      <select class="selectYear">
+      <select id="selectYear">
         <option id="noneYear"></option>
         <option id="animalbirth">Year of Birth</option>
         <option id="licenseexpireddate">License Expired</option>
         <option id="extract_year">Extract Year</option>
       </select>
-      <label>Year: <input type="form" /></label>
+      <label>Year: <input type="form" id="formYear" /></label>
       <div>
-        <button class="submit" type="button">Submit</button>
+        <button class="button" id="submit" type="button">Submit</button>
       </div>
     </div>
 
@@ -26,34 +26,56 @@
 </template>
 
 <script setup>
-const DOM = {
-  typeYearSelect: document.querySelector('selectYear'),
-  buttonSubmit: document.querySelector('submit')
+import HeadingTemplate from './HeadingTemplate.vue'
+import { ref, onMounted } from 'vue'
+
+function getYear() {
+  document.getElementById('submit').addEventListener('click', function () {
+    let year = document.querySelector('#formYear')
+    console.log(year.value)
+    const dog = ref('')
+    async function getDog() {
+      let res = await fetch(
+        /* `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${inputYear}?$limit=10000` */
+        `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${year.value}?$limit=10000`
+      )
+      let data = await res.json()
+      dog.value = data
+    }
+    getDog()
+  })
+} //This is what I have for now for the filtering through the link code. For now, I have got it so that it filters the year (year.value). After this, I am going to try to get typeYear to work. The code above is relatively self-explanatory- it's an api call with an async function as well as getting input from a form and a click function. Later, this will have to be turned into an if-else function incase the user does not fill out one of the required fields, but that is for later. all the blocked code below was during testing- I am leaving it so that it commits to github, but I'll delete it upon the next time I work on the project.
+
+/* const DOMSelect = {
+  typeYearSelect: document.querySelector('#selectYear'),
+  buttonSubmit: document.querySelector('#submit'),
+  formYear: document.getElementById('formYear')
 }
 
 function test() {
   let typeYear = DOM.typeYearSelect.value
   console.log(typeYear)
+  let input = formYear.value
+  console.log(input)
 }
 
-/* DOM.buttonSubmit.addEventListener('click', function () {
-  test()
-}) 
-KM: This and what is above is what I have for now. The current idea is to get the value of what the user selected and go off of the idea of what I had suggested previously. All the work I have done up to this point is in this vue file. When this button is un-commented, the page breaks, and it says that the page cannot read event listener because it is null. I am unsure why this is, but I will change the function later to better suit the intention of the program (to get the classlist)
-*/
+DOMSelect.buttonSubmit.addEventListener('click', function () {}) */
 
-import HeadingTemplate from './HeadingTemplate.vue'
-import { ref, onMounted } from 'vue'
-const dog = ref('')
+/* const dog = ref('')
 async function getDog() {
+  let year = document.querySelector('#formYear')
+  console.log(year.value)
   let res = await fetch(
     `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear}=${inputYear}?$limit=10000`
+    `https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000`
   )
   let data = await res.json()
   dog.value = data
-}
+} */
 
-onMounted(() => {})
+onMounted(() => {
+  getYear()
+})
 </script>
 
 <style scoped>
