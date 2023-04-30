@@ -34,7 +34,8 @@ function getLink() {
     let year = document.querySelector('#formYear')
     console.log(year.value)
     let typeYear = ''
-    if ((document.querySelector('#selectYear').value = 'Year of Birth')) {
+    console.log(document.querySelector('#selectYear').value)
+    /*     if ((document.querySelector('#selectYear').value = 'Year of Birth')) {
       typeYear = 'animalbirth'
       console.log(typeYear)
     } else if ((document.querySelector('#selectYear').value = 'License Expired')) {
@@ -43,29 +44,10 @@ function getLink() {
     } else if ((document.querySelector('#selectYear').value = 'License Issued')) {
       typeYear = 'licenseissueddate'
       console.log(typeYear)
-    }
-    /*
-    switch (document.querySelector('#selectYear').value) {
-      case 'Year of Birth': {
-        let typeYear = animalbirth
-        console.log(typeYear)
-
-        break
-      }
-      case 'License Expired': {
-        let typeYear = 'licenseexpireddate'
-        console.log(typeYear)
-        break
-      }
-      case 'License Issued': {
-        let typeYear = 'licenseissueddate'
-        console.log(typeYear)
-        break
-      }
+    } else {
+      typeYear = ''
     } */
 
-    /*     let selectYear = document.querySelector('#selectYear')
-    console.log(selectYear.value) */
     const dog = ref('')
     async function getDog() {
       let res = await fetch(
@@ -74,6 +56,7 @@ function getLink() {
       )
       let data = await res.json()
       dog.value = data
+      console.log(dog.value)
     }
     getDog()
   })
