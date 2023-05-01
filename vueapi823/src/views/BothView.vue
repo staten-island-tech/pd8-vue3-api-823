@@ -48,6 +48,10 @@ function mapCreation(fieldName) {
       comboMap.set(year, breedMap)
     }
   }
+  // comboMap.forEach(function (element) {
+  //   let array = Array.from(comboMap.get(element), ([breedname, count]) => ({ breedname, count }))
+  //   array.sort((a, b) => b.count - a.count)
+  // })
 }
 
 function organizeData() {
