@@ -13,13 +13,13 @@
       </div>
     </form>
 
-    <div id="resultDiv"></div>
+    <div class="container" id="resultDiv"></div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
+import { ref, onMounted } from 'vue'
 
 let breedNames = []
 let breedCount = []
