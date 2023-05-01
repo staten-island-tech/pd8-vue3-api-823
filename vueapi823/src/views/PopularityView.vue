@@ -13,16 +13,27 @@
       </div>
     </form>
 
-    <div class="container" id="resultDiv"></div>
+    <div class="container" id="resultDiv"><Bar :data="chartData" /></div>
   </div>
 </template>
 
 <script setup>
 import HeadingTemplate from './HeadingTemplate.vue'
 import { ref, onMounted } from 'vue'
+import { Bar } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
 
 let breedNames = []
 let breedCount = []
+
 const popularityMap = new Map()
 function mapCreation(fieldName) {
   popularityMap.clear()
@@ -60,6 +71,7 @@ function organizeDataByPopularity() {
         break
       case 'Least Popular':
         breedNames = []
+        breedCount = []
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
         )
@@ -84,6 +96,29 @@ onMounted(() => {
   getDogFromAPI()
   organizeDataByPopularity()
 })
+</script>
+
+<script>
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default {
+  name: 'BarChart',
+  components: { Bar },
+  data() {
+    return {
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#000000',
+            data: [50, 25, 25]
+          }
+        ]
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
