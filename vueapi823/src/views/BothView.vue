@@ -27,53 +27,25 @@
 import HeadingTemplate from './HeadingTemplate.vue'
 import { ref, onMounted } from 'vue'
 
-// const comboMap = new Map()
-// const nestedMap = new Map()
-// function mapCreation(year) {
-//   comboMap.clear()
-//   nestedMap.clear()
-//   for (let i = 0; i < dog._rawValue.length; i++) {
-//     let keyName = dog._rawValue[i][year] //Year
-//     let keyValue = comboMap.get(keyName) //Check if undefined
-//     let nestedKeyName = dog._rawValue[i].breedname //Breed
-//     let nestedKeyValue = nestedMap.get(nestedKeyName) //Count
-//     if (keyValue) {
-//       // If it is not undefined
-//       if (keyName.nestedKeyName) {
-//         nestedKeyValue++
-//       } else {
-//         nestedKeyValue = 1
-//       }
-//     } else {
-//       // If it is undefined
-//       nestedKeyValue = 1
-//     }
-//     nestedMap.set(nestedKeyName, nestedKeyValue)
-//     comboMap.set(keyName, nestedMap)
-//   }
-//   console.log(nestedMap)
-// }
-
 const comboMap = new Map()
 function mapCreation(fieldName) {
   comboMap.clear()
   for (let i = 0; i < dog._rawValue.length; i++) {
-    let keyName = dog._rawValue[i][fieldName] // Year
-    let breedMap = comboMap.get(keyName) // Year Value
-    let breedname = dog._rawValue[i].breedname // Breed
-    if (comboMap.has(keyName)) {
-      let breedValue = breedMap.get(breedname)
-      if (breedMap.has(breedname)) {
-        breedValue.count += 1
+    let year = dog._rawValue[i][fieldName]
+    let breedMap = comboMap.get(year)
+    let breedName = dog._rawValue[i].breedname
+    if (comboMap.has(year)) {
+      let breedValue = breedMap.get(breedName)
+      if (breedMap.has(breedName)) {
+        breedValue++
       } else {
-        breedValue = { breed: breedname, count: 1 }
-        breedMap.set(breedname, breedValue)
+        breedValue = 1
       }
+      breedMap.set(breedName, breedValue)
     } else {
       breedMap = new Map()
-      let breedValue = { breed: breedname, count: 1 }
-      breedMap.set(breedname, breedValue)
-      comboMap.set(keyName, breedMap)
+      breedMap.set(breedName, 1)
+      comboMap.set(year, breedMap)
     }
   }
 }
