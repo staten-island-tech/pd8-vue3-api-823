@@ -7,7 +7,6 @@
         <option></option>
         <option id="yearBirth">Year of Birth</option>
         <option id="licenseExpired">License Expired</option>
-        <option id="extractYear">Extract Year</option>
       </select>
       <div>
         <button type="submit">Submit</button>
@@ -47,10 +46,6 @@ function organizeDataByYear() {
         break
       case 'License Expired':
         mapCreation('licenseexpireddate', 0, 4)
-        console.log(yearMap)
-        break
-      case 'Extract Year':
-        mapCreation('extract_year')
         console.log(yearMap)
         break
     }
