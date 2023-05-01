@@ -1,27 +1,47 @@
 <template>
   <HeadingTemplate></HeadingTemplate>
-  <div id="informationDiv">Info Here</div>
+  <div id="informationDiv"><Bar :data="chartData" /></div>
   <!-- <div class="container">
     <DogCard v-for="(animal, index) in dog" :key="animal.animalname" :id="index" :animal="animal" />
   </div> -->
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
-// import DogCard from '../components/DogCard.vue'
+</script>
 
-const dog = ref('')
-async function getDog() {
-  let res = await fetch(
-    'https://data.cityofnewyork.us/resource/nu7n-tubp.json?$query=SELECT%0A%20%20%60animalname%60%2C%0A%20%20%60animalgender%60%2C%0A%20%20%60animalbirth%60%2C%0A%20%20%60breedname%60%2C%0A%20%20%60zipcode%60%2C%0A%20%20%60licenseissueddate%60%2C%0A%20%20%60licenseexpireddate%60%2C%0A%20%20%60extract_year%60'
-  )
-  let data = await res.json()
-  dog.value = data
+<script>
+import { Bar } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default {
+  name: 'BarChart',
+  components: { Bar },
+  data() {
+    return {
+      chartData: {
+        labels: ['January', 'February', 'March'],
+        datasets: [
+          {
+            label: 'Popularity',
+            backgroundColor: '#000000',
+            data: [20, 50, 20]
+          }
+        ]
+      }
+    }
+  }
 }
-onMounted(() => {
-  getDog()
-})
 </script>
 
 <style scoped>
