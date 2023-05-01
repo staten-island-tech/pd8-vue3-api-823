@@ -8,6 +8,12 @@
         <option>Most Popular</option>
         <option>Least Popular</option>
       </select>
+      <h2>Year Category</h2>
+      <select id="selectYear">
+        <option id="noneYear"></option>
+        <option id="animalbirth">animalbirth</option>
+      </select>
+      <label>Year: <input type="form" id="formYear" /></label>
       <div>
         <button type="submit">Submit</button>
       </div>
@@ -21,25 +27,43 @@
 import { ref, onMounted } from 'vue'
 import HeadingTemplate from './HeadingTemplate.vue'
 
-let breedNames = []
-let breedCount = []
-const popularityMap = new Map()
-function mapCreation(fieldName) {
-  popularityMap.clear()
-  for (let i = 0; i < dog._rawValue.length; i++) {
-    let keyName = dog._rawValue[i][fieldName]
-    let keyValue = popularityMap.get(keyName)
-    if (keyValue > 0) {
-      keyValue++
-    } else {
-      keyValue = 1
-    }
-    popularityMap.set(keyName, keyValue)
-  }
-}
-
 function organizeDataByPopularity() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
+    let year = document.querySelector('#formYear')
+    console.log(year.value)
+    let typeYear = document.querySelector('#selectYear')
+    console.log(typeYear.value)
+
+    const dog = ref('')
+
+    async function getDogFromAPI() {
+      let res = await fetch(
+        `https://data.cityofnewyork.us/resource/nu7n-tubp.json?${typeYear.value}=${year.value}&$limit=10000`
+      )
+      let data = await res.json()
+      dog.value = data
+    }
+
+    getDogFromAPI()
+
+    let breedNames = []
+    let breedCount = []
+
+    const popularityMap = new Map()
+    function mapCreation(fieldName) {
+      popularityMap.clear()
+      for (let i = 0; i < dog._rawValue.length; i++) {
+        let keyName = dog._rawValue[i][fieldName]
+        let keyValue = popularityMap.get(keyName)
+        if (keyValue > 0) {
+          keyValue++
+        } else {
+          keyValue = 1
+        }
+        popularityMap.set(keyName, keyValue)
+      }
+    }
+
     event.preventDefault()
     mapCreation('breedname')
     let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
@@ -56,10 +80,12 @@ function organizeDataByPopularity() {
           breedCount.push(mostPopular[i].count)
           breedNames.push(mostPopular[i].breedname)
           console.log(breedNames)
+          console.log(breedCount)
         }
         break
       case 'Least Popular':
         breedNames = []
+        breedCount = []
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
         )
@@ -73,15 +99,7 @@ function organizeDataByPopularity() {
   })
 }
 
-const dog = ref('')
-async function getDogFromAPI() {
-  let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
-  let data = await res.json()
-  dog.value = data
-}
-
 onMounted(() => {
-  getDogFromAPI()
   organizeDataByPopularity()
 })
 </script>
