@@ -9,11 +9,12 @@
         <option id="lPopular">Least Popular</option>
       </select>
       <h2>Year Category</h2>
+      <label>Year:</label>
       <select id="selectYear">
         <option id="noneYear"></option>
-        <option id="animalbirth">animalbirth</option>
+        <option id="animalbirth">Birth Year</option>
+        <option id="extractyear">License Expiration Date</option>
       </select>
-      <label>Year:</label>
       <div>
         <button class="button" id="submit" type="submit">Submit</button>
       </div>
@@ -28,10 +29,10 @@ import HeadingTemplate from './HeadingTemplate.vue'
 import { ref, onMounted } from 'vue'
 
 const comboMap = new Map()
-function mapCreation(fieldName) {
+function mapCreation(fieldName, indexStart, indexEnd) {
   comboMap.clear()
   for (let i = 0; i < dog._rawValue.length; i++) {
-    let year = dog._rawValue[i][fieldName]
+    let year = dog._rawValue[i][fieldName].slice(indexStart, indexEnd)
     let breedMap = comboMap.get(year)
     let breedName = dog._rawValue[i].breedname
     if (comboMap.has(year)) {
@@ -48,16 +49,49 @@ function mapCreation(fieldName) {
       comboMap.set(year, breedMap)
     }
   }
-  // comboMap.forEach(function (element) {
-  //   let array = Array.from(comboMap.get(element), ([breedname, count]) => ({ breedname, count }))
-  //   array.sort((a, b) => b.count - a.count)
-  // })
+}
+
+function descendingOrder() {
+  comboMap.forEach(function (valueMap, key, map) {
+    let array = Array.from(valueMap, ([breedname, count]) => ({ breedname, count }))
+    let sorted = array.sort((a, b) => b.count - a.count)
+    map.set(key, sorted)
+  })
+}
+
+function ascendingOrder() {
+  comboMap.forEach(function (valueMap, key, map) {
+    let array = Array.from(valueMap, ([breedname, count]) => ({ breedname, count }))
+    let sorted = array.sort((a, b) => a.count - b.count)
+    map.set(key, sorted)
+  })
 }
 
 function organizeData() {
   document.getElementById('selectionDiv').addEventListener('submit', function (event) {
     event.preventDefault()
-    mapCreation('animalbirth', 'breedname')
+    switch (document.getElementById('selectYear').value) {
+      case 'Birth Year':
+        mapCreation('animalbirth', 0, 4)
+        switch (document.getElementById('selectPopular').value) {
+          case 'Most Popular':
+            descendingOrder()
+            break
+          case 'Least Popular':
+            ascendingOrder()
+            break
+        }
+      case 'License Expiration Date':
+        mapCreation('licenseexpireddate', 0, 4)
+        switch (document.getElementById('selectPopular').value) {
+          case 'Most Popular':
+            descendingOrder()
+            break
+          case 'Least Popular':
+            ascendingOrder()
+            break
+        }
+    }
     console.log(comboMap)
   })
 }
