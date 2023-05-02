@@ -30,80 +30,6 @@ import {
   CategoryScale,
   LinearScale
 } from 'chart.js'
-
-let breedNames = []
-let breedCount = []
-
-const popularityMap = new Map()
-function mapCreation(fieldName) {
-  popularityMap.clear()
-  for (let i = 0; i < dog._rawValue.length; i++) {
-    let keyName = dog._rawValue[i][fieldName]
-    let keyValue = popularityMap.get(keyName)
-    if (keyValue > 0) {
-      keyValue++
-    } else {
-      keyValue = 1
-    }
-    popularityMap.set(keyName, keyValue)
-  }
-}
-
-function organizeDataByPopularity() {
-  document.getElementById('button').addEventListener('click', function (event) {
-    event.preventDefault()
-    mapCreation('breedname')
-    let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
-    document.getElementById('resultDiv').innerHTML = ''
-    switch (document.getElementById('selectPopularity').value) {
-      case 'Most Popular':
-        breedNames = []
-        breedCount = []
-        let mostPopular = array.sort(
-          (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
-        )
-        for (let i = 1; i < 6; i++) {
-          console.log(mostPopular[i])
-          breedCount.push(mostPopular[i].count)
-          breedNames.push(mostPopular[i].breedname)
-          console.log(breedNames)
-        }
-        break
-      case 'Least Popular':
-        breedNames = []
-        breedCount = []
-        let leastPopular = array.sort(
-          (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
-        )
-        for (let i = 0; i < 5; i++) {
-          console.log(leastPopular[i])
-          breedCount.push(leastPopular[i].count)
-          breedNames.push(leastPopular[i].breedname)
-          console.log('TEST1')
-        }
-        break
-    }
-  })
-  test()
-}
-
-function test() {
-  document.getElementById('selectionDiv').addEventListener('submit', function () {
-    console.log(breedNames)
-  })
-}
-
-const dog = ref('')
-async function getDogFromAPI() {
-  let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
-  let data = await res.json()
-  dog.value = data
-}
-
-onMounted(() => {
-  getDogFromAPI()
-  organizeDataByPopularity()
-})
 </script>
 
 <script>
@@ -126,13 +52,88 @@ export default {
       }
     }
   },
-  methods: {
-    test1: function () {
-      const timeout = setTimeout(timed, 500)
-      function timed() {}
-    }
+  methods: {},
+  mounted() {
+    console.log(this.dog)
   },
-  mounted() {}
+  setup() {
+    let breedNames = []
+    let breedCount = []
+
+    const popularityMap = new Map()
+    function mapCreation(fieldName) {
+      popularityMap.clear()
+      for (let i = 0; i < dog._rawValue.length; i++) {
+        let keyName = dog._rawValue[i][fieldName]
+        let keyValue = popularityMap.get(keyName)
+        if (keyValue > 0) {
+          keyValue++
+        } else {
+          keyValue = 1
+        }
+        popularityMap.set(keyName, keyValue)
+      }
+    }
+
+    function organizeDataByPopularity() {
+      document.getElementById('button').addEventListener('click', function (event) {
+        event.preventDefault()
+        mapCreation('breedname')
+        let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
+        document.getElementById('resultDiv').innerHTML = ''
+        switch (document.getElementById('selectPopularity').value) {
+          case 'Most Popular':
+            breedNames = []
+            breedCount = []
+            let mostPopular = array.sort(
+              (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
+            )
+            for (let i = 1; i < 6; i++) {
+              console.log(mostPopular[i])
+              breedCount.push(mostPopular[i].count)
+              breedNames.push(mostPopular[i].breedname)
+              console.log(breedNames)
+            }
+            break
+          case 'Least Popular':
+            breedNames = []
+            breedCount = []
+            let leastPopular = array.sort(
+              (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
+            )
+            for (let i = 0; i < 5; i++) {
+              console.log(leastPopular[i])
+              breedCount.push(leastPopular[i].count)
+              breedNames.push(leastPopular[i].breedname)
+              console.log('TEST1')
+            }
+            break
+        }
+      })
+      test()
+    }
+
+    function test() {
+      document.getElementById('selectionDiv').addEventListener('submit', function () {
+        console.log(breedNames)
+      })
+    }
+
+    const dog = ref('')
+    async function getDogFromAPI() {
+      let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
+      let data = await res.json()
+      dog.value = data
+    }
+
+    onMounted(() => {
+      getDogFromAPI()
+      organizeDataByPopularity()
+    })
+    return {
+      dog
+    }
+  }
 }
 </script>
 
