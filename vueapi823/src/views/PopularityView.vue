@@ -79,7 +79,7 @@ function organizeDataByPopularity() {
           console.log(leastPopular[i])
           breedCount.push(leastPopular[i].count)
           breedNames.push(leastPopular[i].breedname)
-          console.log(breedNames)
+          console.log('TEST1')
         }
         break
     }

@@ -39,7 +39,7 @@ export default {
         labels: [],
         datasets: [[{ data: [] }]]
       },
-      chartStyle: {}
+      chartStyle: { responsive: true, backgroundColor: ['#000000', '#999999'] }
     }
   },
   mounted() {
@@ -50,7 +50,10 @@ export default {
     getDog: async function () {
       let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
       let data = await res.json()
-      console.log('data1')
+      console.log(data)
+      let breed1 = data.filter((animal) => (animal.breedname = 'Labrador Retriever'))
+      this.chartData.labels.push('Labrador Retriever')
+      this.chartData.datasets[0].data.push(breed1.length)
     }
   }
 }
