@@ -1,12 +1,12 @@
 <template>
   <HeadingTemplate></HeadingTemplate>
   <div id="wrapperDiv">
-    <h2>Popularity Category</h2>
+    <!--  <h2>Popularity Category</h2>
     <select id="selectPopularity">
       <option></option>
       <option>Most Popular</option>
       <option>Least Popular</option>
-    </select>
+    </select> -->
 
     <div></div>
     <div class="container" id="resultDiv"><Bar :data="chartData" /></div>
@@ -39,7 +39,8 @@ export default {
         labels: [],
         datasets: [[{ data: [] }]]
       },
-      chartStyle: { responsive: true, backgroundColor: ['#000000', '#999999'] }
+      chartStyle: { responsive: true, backgroundColor: ['#000000', '#999999'] },
+      gotData: false
     }
   },
   mounted() {
@@ -48,12 +49,20 @@ export default {
 
   methods: {
     getDog: async function () {
-      let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
-      let data = await res.json()
-      console.log(data)
-      let breed1 = data.filter((animal) => (animal.breedname = 'Labrador Retriever'))
-      this.chartData.labels.push('Labrador Retriever')
-      this.chartData.datasets[0].data.push(breed1.length)
+      try {
+        let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=1000')
+        let data = await res.json()
+        console.log(data)
+        let breed1 = data.filter((animal) => (animal.breedname = 'Labrador Retriever'))
+        this.chartData.labels.push('Labrador Retriever')
+        this.chartData.datasets[0].data.push(breed1.length)
+        console.log(this.chartData.datasets[0].data)
+        let breed2 = data.filter((animal) => (animal.breedname = 'Standard Schnauzer'))
+        this.chartData.labels.push('Standard Schnauzer')
+        this.chartData.datasets[0].data.push(breed2.length)
+        console.log(breed1)
+        this.gotData = true
+      } catch (error) {}
     }
   }
 }
