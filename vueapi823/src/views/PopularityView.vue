@@ -3,7 +3,7 @@
   <div id="wrapperDiv">
     <form id="selectionDiv">
       <h2>Popularity Category</h2>
-      <select id="selectPopularity">
+      <select id="selectPopularity" required>
         <option></option>
         <option>Most Popular</option>
         <option>Least Popular</option>

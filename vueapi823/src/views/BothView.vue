@@ -3,14 +3,14 @@
   <div id="wrapperDiv">
     <form id="selectionDiv">
       <h2>Popularity Category</h2>
-      <select id="selectPopular">
+      <select id="selectPopular" required>
         <option id="nonePopular"></option>
         <option id="mPopular">Most Popular</option>
         <option id="lPopular">Least Popular</option>
       </select>
       <h2>Year Category</h2>
       <label>Year:</label>
-      <select id="selectYear">
+      <select id="selectYear" required>
         <option id="noneYear"></option>
         <option id="animalbirth">Birth Year</option>
         <option id="extractyear">License Expiration Date</option>
@@ -49,6 +49,7 @@ function mapCreation(fieldName, indexStart, indexEnd) {
       comboMap.set(year, breedMap)
     }
   }
+  console.log(fieldName)
 }
 
 function descendingOrder() {
@@ -72,7 +73,7 @@ function organizeData() {
     event.preventDefault()
     switch (document.getElementById('selectYear').value) {
       case 'Birth Year':
-        mapCreation('animalbirth', 0, 4)
+        mapCreation('animalbirth')
         switch (document.getElementById('selectPopular').value) {
           case 'Most Popular':
             descendingOrder()
@@ -81,6 +82,7 @@ function organizeData() {
             ascendingOrder()
             break
         }
+        break
       case 'License Expiration Date':
         mapCreation('licenseexpireddate', 0, 4)
         switch (document.getElementById('selectPopular').value) {
@@ -91,8 +93,8 @@ function organizeData() {
             ascendingOrder()
             break
         }
+        break
     }
-    console.log(comboMap)
   })
 }
 
@@ -102,8 +104,6 @@ async function getDog() {
   let data = await res.json()
   dog.value = data
 }
-
-//This is what I have for now for the filtering through the link code. For now, I have got it so that it filters the year (year.value). After this, I am going to try to get typeYear to work. The code above is relatively self-explanatory- it's an api call with an async function as well as getting input from a form and a click function. Later, this will have to be turned into an if-else function incase the user does not fill out one of the required fields, but that is for later. all the blocked code below was during testing- I am leaving it so that it commits to github, but I'll delete it upon the next time I work on the project.
 
 onMounted(() => {
   getDog()

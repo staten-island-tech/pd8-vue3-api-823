@@ -3,7 +3,7 @@
   <div id="wrapperDiv">
     <form id="selectionDiv">
       <h2>Year Category</h2>
-      <select id="selectYear">
+      <select id="selectYear" required>
         <option></option>
         <option id="yearBirth">Year of Birth</option>
         <option id="licenseExpired">License Expired</option>
