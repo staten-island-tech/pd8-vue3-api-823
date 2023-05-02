@@ -48,11 +48,11 @@ export default {
   },
 
   methods: {
-    getDog: async function () {
+    getDog: async function (event) {
       try {
-        let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=1000')
+        event.preventDefault()
+        let res = await fetch('https://data.cityofnewyork.us/resource/nu7n-tubp.json?$limit=10000')
         let data = await res.json()
-        console.log(data)
         let breed1 = data.filter((animal) => (animal.breedname = 'Labrador Retriever'))
         this.chartData.labels.push('Labrador Retriever')
         this.chartData.datasets[0].data.push(breed1.length)
@@ -60,7 +60,7 @@ export default {
         let breed2 = data.filter((animal) => (animal.breedname = 'Standard Schnauzer'))
         this.chartData.labels.push('Standard Schnauzer')
         this.chartData.datasets[0].data.push(breed2.length)
-        console.log(breed1)
+        console.log('AAAAA')
         this.gotData = true
       } catch (error) {}
     }

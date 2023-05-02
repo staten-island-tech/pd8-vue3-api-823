@@ -50,8 +50,7 @@ function mapCreation(fieldName) {
 }
 
 function organizeDataByPopularity() {
-  document.getElementById('button').addEventListener('click', function (event) {
-    event.preventDefault()
+  document.getElementById('button').addEventListener('click', function () {
     mapCreation('breedname')
     let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
     document.getElementById('resultDiv').innerHTML = ''
