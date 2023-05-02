@@ -111,12 +111,12 @@ export default {
   data() {
     return {
       chartData: {
-        labels: [],
+        labels: ['January', 'February', 'March'],
         datasets: [
           {
             label: 'Data One',
-            backgroundColor: '#000000',
-            data: [50, 25, 25]
+            backgroundColor: '#f87979',
+            data: [40, 20, 12]
           }
         ]
       }

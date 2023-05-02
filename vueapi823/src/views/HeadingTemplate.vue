@@ -4,7 +4,6 @@
     <router-link to="PopularityView">Popularity</router-link>
     <router-link to="YearView">Year</router-link>
     <router-link to="BothView">Both</router-link>
-    <router-link to="PopularityChartView">PopularityChart</router-link>
   </div>
 </template>
 

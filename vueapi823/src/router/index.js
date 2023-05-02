@@ -14,11 +14,7 @@ const router = createRouter({
       name: 'Popularity',
       component: () => import('../views/PopularityView.vue')
     },
-    {
-      path: '/PopularityChartView',
-      name: 'PopularityChartView',
-      component: () => import('../views/PopularityChartView.vue')
-    },
+
     {
       path: '/BothView',
       name: 'Both',
