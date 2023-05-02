@@ -9,7 +9,7 @@
         <option>Least Popular</option>
       </select>
       <div>
-        <button type="submit">Submit</button>
+        <button id="button" type="button" @click="test1">Submit</button>
       </div>
     </form>
 
@@ -50,7 +50,7 @@ function mapCreation(fieldName) {
 }
 
 function organizeDataByPopularity() {
-  document.getElementById('selectionDiv').addEventListener('submit', function (event) {
+  document.getElementById('button').addEventListener('click', function (event) {
     event.preventDefault()
     mapCreation('breedname')
     let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
@@ -79,9 +79,17 @@ function organizeDataByPopularity() {
           console.log(leastPopular[i])
           breedCount.push(leastPopular[i].count)
           breedNames.push(leastPopular[i].breedname)
+          console.log(breedNames)
         }
         break
     }
+  })
+  test()
+}
+
+function test() {
+  document.getElementById('selectionDiv').addEventListener('submit', function () {
+    console.log(breedNames)
   })
 }
 
@@ -117,7 +125,14 @@ export default {
         ]
       }
     }
-  }
+  },
+  methods: {
+    test1: function () {
+      const timeout = setTimeout(timed, 500)
+      function timed() {}
+    }
+  },
+  mounted() {}
 }
 </script>
 
