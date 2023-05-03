@@ -13,7 +13,9 @@
       </div>
     </form>
 
-    <div class="container" id="resultDiv"><Bar :data="chartData" /></div>
+    <div class="container" id="resultDiv">
+      <Bar :data="chartData" :key="chartData.datasets[0].data" />
+    </div>
   </div>
 </template>
 
@@ -34,12 +36,12 @@ import {
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const chartData = {
-  labels: ['January', 'February', 'March'],
+  labels: [],
   datasets: [
     {
       label: 'Data One',
       backgroundColor: '#f87979',
-      data: [40, 20, 12]
+      data: []
     }
   ]
 }
@@ -78,7 +80,10 @@ function organizeDataByPopularity() {
           console.log(mostPopular[i])
           breedCount.push(mostPopular[i].count)
           breedNames.push(mostPopular[i].breedname)
+          chartData.datasets[0].data.push(breedCount)
+          chartData.labels.push(breedNames)
           console.log(breedNames)
+          console.log(JSON.stringify(breedCount))
         }
         break
       case 'Least Popular':
@@ -91,15 +96,12 @@ function organizeDataByPopularity() {
           console.log(leastPopular[i])
           breedCount.push(leastPopular[i].count)
           breedNames.push(leastPopular[i].breedname)
+          chartData.datasets[0].data.push(breedCount)
+          chartData.labels.push(breedNames)
         }
         break
     }
-    test()
   })
-}
-
-function test() {
-  console.log(breedNames)
 }
 
 const dog = ref('')
