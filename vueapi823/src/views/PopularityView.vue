@@ -31,6 +31,19 @@ import {
   LinearScale
 } from 'chart.js'
 
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+const chartData = {
+  labels: ['January', 'February', 'March'],
+  datasets: [
+    {
+      label: 'Data One',
+      backgroundColor: '#f87979',
+      data: [40, 20, 12]
+    }
+  ]
+}
+
 let breedNames = []
 let breedCount = []
 
@@ -103,8 +116,7 @@ onMounted(() => {
 </script>
 
 <script>
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
+/* 
 export default {
   name: 'BarChart',
   components: { Bar },
@@ -133,7 +145,7 @@ export default {
     })
     return {}
   }
-}
+} */
 </script>
 
 <style scoped>
