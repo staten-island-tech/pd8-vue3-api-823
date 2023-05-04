@@ -14,7 +14,7 @@
     </form>
 
     <div class="container" id="resultDiv">
-      <Doughnut id="Chart" :data="chartData" :key="chartData.datasets[0].data"> </Doughnut>
+      <Doughnut id="Chart" :data="chartData" #default> </Doughnut>
     </div>
   </div>
 </template>
@@ -93,16 +93,16 @@ function organizeDataByPopularity() {
     document.getElementById('resultDiv').innerHTML = ''
     switch (document.getElementById('selectPopularity').value) {
       case 'Most Popular':
-        breedNames = []
-        breedCount = []
+        /*         breedNames = []
+        breedCount = [] */
 
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
         )
         for (let i = 1; i < 6; i++) {
           console.log(mostPopular[i])
-          breedCount.push(mostPopular[i].count)
-          breedNames.push(mostPopular[i].breedname)
+          /*           breedCount.push(mostPopular[i].count)
+          breedNames.push(mostPopular[i].breedname) */
 
           chartData.datasets[0].data.push(mostPopular[i].count)
           chartData.labels.push(mostPopular[i].breedname)
@@ -110,15 +110,15 @@ function organizeDataByPopularity() {
         }
         break
       case 'Least Popular':
-        breedNames = []
-        breedCount = []
+        /*         breedNames = []
+        breedCount = [] */
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
         )
         for (let i = 0; i < 5; i++) {
           console.log(leastPopular[i])
-          breedCount.push(leastPopular[i].count)
-          breedNames.push(leastPopular[i].breedname)
+          /*           breedCount.push(leastPopular[i].count)
+          breedNames.push(leastPopular[i].breedname) */
           chartData.datasets[0].data.push(leastPopular[i].count)
           chartData.labels.push(leastPopular[i].breedname)
         }
