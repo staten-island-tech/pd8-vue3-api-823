@@ -14,7 +14,7 @@
     </form>
 
     <div class="container" id="resultDiv">
-      <Doughnut id="Chart" :data="chartData" #default> </Doughnut>
+      <Doughnut id="Chart" :data="chartData" :key="chartData.active"> </Doughnut>
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ ChartJS.register(
 )
 
 const chartData = {
+  active: 'false',
   labels: [],
   datasets: [
     {
@@ -63,9 +64,6 @@ const chartData = {
     }
   ]
 }
-
-let breedNames = []
-let breedCount = []
 
 const popularityMap = new Map()
 function mapCreation(fieldName) {
@@ -85,6 +83,8 @@ function mapCreation(fieldName) {
 function organizeDataByPopularity() {
   document.getElementById('button').addEventListener('click', function () {
     mapCreation('breedname')
+
+    chartData.active = 'false'
 
     chartData.datasets[0].data.length = 0
     chartData.labels.length = 0
@@ -106,7 +106,7 @@ function organizeDataByPopularity() {
 
           chartData.datasets[0].data.push(mostPopular[i].count)
           chartData.labels.push(mostPopular[i].breedname)
-          console.log(breedNames)
+          chartData.active = 'true'
         }
         break
       case 'Least Popular':
@@ -122,7 +122,7 @@ function organizeDataByPopularity() {
           chartData.datasets[0].data.push(leastPopular[i].count)
           chartData.labels.push(leastPopular[i].breedname)
         }
-        this.active = true
+        chartData.active = 'true'
         break
     }
   })
