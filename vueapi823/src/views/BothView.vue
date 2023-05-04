@@ -77,9 +77,11 @@ function organizeData() {
         switch (document.getElementById('selectPopular').value) {
           case 'Most Popular':
             descendingOrder()
+            console.log(comboMap)
             break
           case 'Least Popular':
             ascendingOrder()
+            console.log(comboMap)
             break
         }
         break
@@ -88,9 +90,11 @@ function organizeData() {
         switch (document.getElementById('selectPopular').value) {
           case 'Most Popular':
             descendingOrder()
+            console.log(comboMap)
             break
           case 'Least Popular':
             ascendingOrder()
+            console.log(comboMap)
             break
         }
         break

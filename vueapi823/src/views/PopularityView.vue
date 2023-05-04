@@ -9,12 +9,12 @@
         <option>Least Popular</option>
       </select>
       <div>
-        <button id="button" type="button" @click="test1">Submit</button>
+        <button id="button" type="button">Submit</button>
       </div>
     </form>
 
     <div class="container" id="resultDiv">
-      <Bar :data="chartData" :key="chartData.datasets[0].data" />
+      <Doughnut id="Chart" :data="chartData" :key="chartData.datasets[0].data"> </Doughnut>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
 <script setup>
 import HeadingTemplate from './HeadingTemplate.vue'
 import { ref, onMounted } from 'vue'
-import { Bar } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs'
 import {
   Chart as ChartJS,
   Title,
@@ -30,17 +30,35 @@ import {
   Legend,
   BarElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  ArcElement,
+  PointElement
 } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement,
+  PointElement
+)
 
 const chartData = {
   labels: [],
   datasets: [
     {
-      label: 'Data One',
-      backgroundColor: '#f87979',
+      /*       active: false, */
+      label: 'Popularity of Dogs in Vue',
+      backgroundColor: [
+        'rgb(31, 54, 61)',
+        'rgb(64, 121, 140)',
+        'rgb(112, 169, 161)',
+        'rgb(158, 193, 163)',
+        'rgb(207, 224, 195)'
+      ],
       data: []
     }
   ]
@@ -67,12 +85,17 @@ function mapCreation(fieldName) {
 function organizeDataByPopularity() {
   document.getElementById('button').addEventListener('click', function () {
     mapCreation('breedname')
+
+    chartData.datasets[0].data.length = 0
+    chartData.labels.length = 0
+
     let array = Array.from(popularityMap, ([breedname, count]) => ({ breedname, count }))
     document.getElementById('resultDiv').innerHTML = ''
     switch (document.getElementById('selectPopularity').value) {
       case 'Most Popular':
         breedNames = []
         breedCount = []
+
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
         )
@@ -80,10 +103,10 @@ function organizeDataByPopularity() {
           console.log(mostPopular[i])
           breedCount.push(mostPopular[i].count)
           breedNames.push(mostPopular[i].breedname)
-          chartData.datasets[0].data.push(breedCount)
-          chartData.labels.push(breedNames)
+
+          chartData.datasets[0].data.push(mostPopular[i].count)
+          chartData.labels.push(mostPopular[i].breedname)
           console.log(breedNames)
-          console.log(JSON.stringify(breedCount))
         }
         break
       case 'Least Popular':
@@ -96,9 +119,10 @@ function organizeDataByPopularity() {
           console.log(leastPopular[i])
           breedCount.push(leastPopular[i].count)
           breedNames.push(leastPopular[i].breedname)
-          chartData.datasets[0].data.push(breedCount)
-          chartData.labels.push(breedNames)
+          chartData.datasets[0].data.push(leastPopular[i].count)
+          chartData.labels.push(leastPopular[i].breedname)
         }
+        this.active = true
         break
     }
   })
@@ -117,38 +141,7 @@ onMounted(() => {
 })
 </script>
 
-<script>
-/* 
-export default {
-  name: 'BarChart',
-  components: { Bar },
-  data() {
-    return {
-      chartData: {
-        labels: ['January', 'February', 'March'],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 20, 12]
-          }
-        ]
-      }
-    }
-  },
-  methods: {},
-  mounted() {},
-  setup() {
-    function test() {
-      console.log('test')
-    }
-    onMounted(() => {
-      test()
-    })
-    return {}
-  }
-} */
-</script>
+<script></script>
 
 <style scoped>
 #informationDiv {
