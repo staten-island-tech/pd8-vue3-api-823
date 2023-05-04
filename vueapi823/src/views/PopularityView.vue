@@ -4,17 +4,17 @@
     <form id="selectionDiv">
       <h2>Popularity Category</h2>
       <select id="selectPopularity" required>
-        <option></option>
         <option>Most Popular</option>
         <option>Least Popular</option>
       </select>
       <div>
-        <button id="button" type="button">Submit</button>
+        <button id="button" type="button" @click="loaded = !loaded">Submit</button>
       </div>
     </form>
 
     <div class="container" id="resultDiv">
-      <Doughnut id="Chart" :data="chartData" :key="chartData.active"> </Doughnut>
+      <Doughnut v-if="loaded" id="Chart" :data="chartData" :key="chartData.active"> </Doughnut>
+      <p v-else>test</p>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@
 import HeadingTemplate from './HeadingTemplate.vue'
 import { ref, onMounted } from 'vue'
 import { Doughnut } from 'vue-chartjs'
+
 import {
   Chart as ChartJS,
   Title,
@@ -46,12 +47,12 @@ ChartJS.register(
   PointElement
 )
 
+let loaded = ref(false)
 const chartData = {
   active: 'false',
   labels: [],
   datasets: [
     {
-      /*       active: false, */
       label: 'Popularity of Dogs in Vue',
       backgroundColor: [
         'rgb(31, 54, 61)',
@@ -64,6 +65,8 @@ const chartData = {
     }
   ]
 }
+
+function pushData() {}
 
 const popularityMap = new Map()
 function mapCreation(fieldName) {
@@ -93,16 +96,11 @@ function organizeDataByPopularity() {
     document.getElementById('resultDiv').innerHTML = ''
     switch (document.getElementById('selectPopularity').value) {
       case 'Most Popular':
-        /*         breedNames = []
-        breedCount = [] */
-
         let mostPopular = array.sort(
           (firstBreed, secondBreed) => secondBreed.count - firstBreed.count
         )
         for (let i = 1; i < 6; i++) {
           console.log(mostPopular[i])
-          /*           breedCount.push(mostPopular[i].count)
-          breedNames.push(mostPopular[i].breedname) */
 
           chartData.datasets[0].data.push(mostPopular[i].count)
           chartData.labels.push(mostPopular[i].breedname)
@@ -110,19 +108,17 @@ function organizeDataByPopularity() {
         }
         break
       case 'Least Popular':
-        /*         breedNames = []
-        breedCount = [] */
         let leastPopular = array.sort(
           (firstBreed, secondBreed) => firstBreed.count - secondBreed.count
         )
         for (let i = 0; i < 5; i++) {
           console.log(leastPopular[i])
-          /*           breedCount.push(leastPopular[i].count)
-          breedNames.push(leastPopular[i].breedname) */
+
           chartData.datasets[0].data.push(leastPopular[i].count)
           chartData.labels.push(leastPopular[i].breedname)
         }
         chartData.active = 'true'
+
         break
     }
   })
@@ -138,6 +134,7 @@ async function getDogFromAPI() {
 onMounted(() => {
   getDogFromAPI()
   organizeDataByPopularity()
+  let loaded = ref(false)
 })
 </script>
 
