@@ -1,5 +1,4 @@
 <template>
-  <HeadingTemplate></HeadingTemplate>
   <div id="wrapperDiv">
     <form id="selectionDiv">
       <h2>Popularity Category</h2>

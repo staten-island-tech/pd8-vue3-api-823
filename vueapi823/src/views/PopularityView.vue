@@ -2,7 +2,7 @@
   <HeadingTemplate></HeadingTemplate>
   <div id="wrapperDiv">
     <form id="selectionDiv">
-      <h2>Popularity Category</h2>
+      <h2>Popularity Category (Only chart that is "functional". Will be redone.)</h2>
       <select id="selectPopularity" required>
         <option>Most Popular</option>
         <option>Least Popular</option>

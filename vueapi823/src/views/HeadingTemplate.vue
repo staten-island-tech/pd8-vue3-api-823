@@ -2,8 +2,6 @@
   <div id="headingDiv">
     <router-link to="/">Home</router-link>
     <router-link to="PopularityView">Popularity</router-link>
-    <router-link to="YearView">Year</router-link>
-    <router-link to="BothView">Both</router-link>
   </div>
 </template>
 
